@@ -4,72 +4,91 @@ import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.design.widget.BottomNavigationView;
 import android.support.v7.app.AppCompatActivity;
-import android.view.MenuItem;
-import android.widget.TextView;
+import android.support.v4.view.ViewPager;
+import android.support.v4.app.Fragment;
 import com.ashokvarma.bottomnavigation.BottomNavigationBar;
 import com.ashokvarma.bottomnavigation.BottomNavigationItem;
 
+import java.util.ArrayList;
+import java.util.List;
 
-public class CampusActivity extends AppCompatActivity {
+public class CampusActivity extends AppCompatActivity implements ViewPager.OnPageChangeListener{
 
-    private TextView txt_main;
-    private BottomNavigationBar bottom_bar;
+    private ViewPager viewPager;
+    private BottomNavigationBar bottomNavigationBar;
+    private List<Fragment> fragments;
 
+    //app启动动作
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_campus);
         initView();
-        initEvent();
     }
 
-    private void initEvent() {
-        bottom_bar.setTabSelectedListener(new BottomNavigationBar.OnTabSelectedListener() {
+    //view视图初始化
+    private void initView() {
+        initBottomNavigationBar();
+        initViewPager();
+
+    }
+
+    //底部导航栏
+    private void initBottomNavigationBar() {
+        //设置底部tab按钮格式
+        bottomNavigationBar = (BottomNavigationBar) findViewById(R.id.bottom_navigation_bar);
+        bottomNavigationBar
+                .setActiveColor(R.color.skyblue)
+                .setMode(BottomNavigationBar.MODE_FIXED)
+                .addItem(new BottomNavigationItem(R.drawable.ic_home_black_24dp, (getString(R.string.title_news))))
+                .addItem(new BottomNavigationItem(R.drawable.ic_home_black_24dp, (getString(R.string.title_gpa))))
+                .addItem(new BottomNavigationItem(R.drawable.ic_notifications_black_24dp, (getString(R.string.title_bbs))))
+                .addItem(new BottomNavigationItem(R.drawable.ic_notifications_black_24dp, (getString(R.string.title_about))))
+                .initialise();
+
+        //设置tab按钮点击事件
+        bottomNavigationBar.setTabSelectedListener(new BottomNavigationBar.OnTabSelectedListener(){
             @Override
             public void onTabSelected(int position) {
-                switch (position) {
-                    case 0:
-                        txt_main.setText(getString(R.string.title_news));
-                        break;
-                    case 1:
-                        txt_main.setText(getString(R.string.title_gpa));
-                        break;
-                    case 2:
-                        txt_main.setText(getString(R.string.title_bbs));
-                        break;
-                    case 3:
-                        txt_main.setText(getString(R.string.title_about));
-                        break;
-                }
-            }
 
+                viewPager.setCurrentItem(position);
+            }
             @Override
             public void onTabUnselected(int position) {
-
             }
-
             @Override
             public void onTabReselected(int position) {
-
             }
         });
     }
 
-    private void initView() {
-        txt_main = (TextView) findViewById(R.id.txt_main);
-        bottom_bar = (BottomNavigationBar) findViewById(R.id.bottom_navigation_bar);
-
-        bottom_bar
-                .setActiveColor(R.color.skyblue)
-                .setMode(BottomNavigationBar.MODE_FIXED)
-                .addItem(new BottomNavigationItem(R.drawable.ic_home_black_24dp, "Home"))
-                .addItem(new BottomNavigationItem(R.drawable.ic_home_black_24dp, "Books"))
-                .addItem(new BottomNavigationItem(R.drawable.ic_notifications_black_24dp, "Music"))
-                .addItem(new BottomNavigationItem(R.drawable.ic_notifications_black_24dp, "Movies & TV"))
-                .initialise();
-        txt_main.setText(getString(R.string.title_news));
-
+    //导航栏的页面切换
+    private void initViewPager() {
+        viewPager = (ViewPager) findViewById(R.id.view_pager);
+        //分别添加4个fragment
+        fragments = new ArrayList<Fragment>();
+        fragments.add(new NewsFragment());
+        fragments.add(new GPAFragment());
+        fragments.add(new BBSFragment());
+        fragments.add(new AboutFragment());
+        //设置viewPager跳转适配器
+        viewPager.setAdapter(new SectionsPagerAdapter(getSupportFragmentManager(), fragments));
+        viewPager.addOnPageChangeListener(this);
+        viewPager.setCurrentItem(0);
     }
 
+    @Override
+    public void onPageScrolled(int position, float positionOffset, int positionOffsetPixels) {
+    }
+
+    @Override
+    public void onPageSelected(int position) {
+
+        bottomNavigationBar.selectTab(position);
+    }
+
+    @Override
+    public void onPageScrollStateChanged(int state) {
+    }
 }
 
