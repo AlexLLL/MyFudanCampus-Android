@@ -18,7 +18,7 @@ public class CampusActivity extends AppCompatActivity implements ViewPager.OnPag
     private BottomNavigationBar bottomNavigationBar;
     private List<Fragment> fragments;
 
-    //app启动动作
+    //app启动所进行的动作
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -38,12 +38,12 @@ public class CampusActivity extends AppCompatActivity implements ViewPager.OnPag
         //设置底部tab按钮格式
         bottomNavigationBar = (BottomNavigationBar) findViewById(R.id.bottom_navigation_bar);
         bottomNavigationBar
-                .setActiveColor(R.color.skyblue)
+                .setActiveColor(R.color.dodgerblue)
                 .setMode(BottomNavigationBar.MODE_FIXED)
-                .addItem(new BottomNavigationItem(R.drawable.ic_home_black_24dp, (getString(R.string.title_news))))
-                .addItem(new BottomNavigationItem(R.drawable.ic_home_black_24dp, (getString(R.string.title_gpa))))
-                .addItem(new BottomNavigationItem(R.drawable.ic_notifications_black_24dp, (getString(R.string.title_bbs))))
-                .addItem(new BottomNavigationItem(R.drawable.ic_notifications_black_24dp, (getString(R.string.title_about))))
+                .addItem(new BottomNavigationItem(R.drawable.ic_1, (getString(R.string.title_news))))
+                .addItem(new BottomNavigationItem(R.drawable.ic_2, (getString(R.string.title_gpa))))
+                .addItem(new BottomNavigationItem(R.drawable.ic_3, (getString(R.string.title_bbs))))
+                .addItem(new BottomNavigationItem(R.drawable.ic_4, (getString(R.string.title_about))))
                 .initialise();
 
         //设置tab按钮点击事件
