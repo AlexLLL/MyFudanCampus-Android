@@ -41,6 +41,13 @@ public class SQLiteManager extends SQLiteAssetHelper {
             do{
                 DataModel pointer= new DataModel();
                 pointer.setLessonName(cursor.getString(cursor.getColumnIndex("lessonName")));
+                pointer.setLessonCode(cursor.getString(cursor.getColumnIndex("lessonCode")));
+                pointer.setCreditPoint(cursor.getFloat(cursor.getColumnIndex("creditPoint")));
+                pointer.setSemesterName(cursor.getString(cursor.getColumnIndex("semesterName")));
+                pointer.setTeacherName(cursor.getString(cursor.getColumnIndex("teacherName")));
+                pointer.setTotalStudentNumber(cursor.getInt(cursor.getColumnIndex("totalStudentNumber")));
+                pointer.setScoreValue(cursor.getString(cursor.getColumnIndex("scoreValue")));
+                pointer.setStudentCount(cursor.getFloat(cursor.getColumnIndex("studentCount")));
                 resultList.add(pointer);
             }while(cursor.moveToNext());
         }

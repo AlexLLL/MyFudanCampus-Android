@@ -75,11 +75,11 @@ public class GPAFragment extends Fragment {
                     }
                     //将SQL数组转换成我们想要的数组
                     GPAModel model = new GPAModel();
-                    model.setLessonName(dataList.get(test).getLessonName());
-                    model.setLessonCode(dataList.get(test).getLessonCode());
+                    model.setLessonName("  "+dataList.get(test).getLessonName());
+                    model.setLessonCode(dataList.get(test).getLessonCode()+"  ");
                     model.setCreditPoint(dataList.get(test).getCreditPoint());
-                    model.setSemesterName(dataList.get(test).getSemesterName());
-                    model.setTeacherName(dataList.get(test).getTeacherName());
+                    model.setSemesterName("  "+dataList.get(test).getSemesterName());
+                    model.setTeacherName(dataList.get(test).getTeacherName()+"  ");
                     model.setTotalStudentNumber(dataList.get(test).getTotalStudentNumber());
                     model.setScoreValue(scoreValue);
                     model.setStudentCount(scoreCount);
