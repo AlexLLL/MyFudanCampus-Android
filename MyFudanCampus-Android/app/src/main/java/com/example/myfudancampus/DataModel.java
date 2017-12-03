@@ -7,12 +7,12 @@ package com.example.myfudancampus;
 public class DataModel {
     private String lessonName;
     private String lessonCode;
-    private Double creditPoint;
+    private Float creditPoint;
     private Integer totalStudentNumber;
     private String teacherName;
     private String semesterName;
     private String scoreValue;
-    private Integer studentCount;
+    private Float studentCount;
 
     public String getLessonName() {
 
@@ -32,12 +32,12 @@ public class DataModel {
 
         this.lessonCode = code;
     }
-    public Double getCreditPoint() {
+    public Float getCreditPoint() {
 
         return creditPoint;
     }
 
-    public void setCreditPoint(Double data) {
+    public void setCreditPoint(Float data) {
 
         this.creditPoint = data;
     }
@@ -77,12 +77,12 @@ public class DataModel {
 
         this.scoreValue = data;
     }
-    public Integer getStudentCount() {
+    public Float getStudentCount() {
 
         return studentCount;
     }
 
-    public void setStudentCount(Integer data) {
+    public void setStudentCount(Float data) {
 
         this.studentCount = data;
     }

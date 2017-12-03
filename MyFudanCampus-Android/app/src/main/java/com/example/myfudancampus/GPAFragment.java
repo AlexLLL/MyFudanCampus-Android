@@ -3,93 +3,113 @@ package com.example.myfudancampus;
 /**
  * Created by alex on 2017/12/1.
  */
+import android.database.sqlite.SQLiteDatabase;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.support.v7.widget.LinearLayoutManager;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.support.v7.widget.RecyclerView;
 import android.widget.TextView;
-import okhttp3.OkHttpClient;
-import okhttp3.Request;
-import okhttp3.Response;
-import android.util.Log;
 import java.util.ArrayList;
 import java.util.List;
-import java.util.regex.Matcher;
-import java.util.regex.Pattern;
+
 
 public class GPAFragment extends Fragment {
 
-    List<NewsModel> resultList = new ArrayList<>();
-    List<NewsModel> htmlList = new ArrayList<>();
+    List<DataModel> resultList = new ArrayList<>();
+    List<DataModel> dataList = new ArrayList<>();
+    String inputText = "C";
+    public static final String TAG = "GPA";
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
-        View newsView = inflater.inflate(R.layout.fragment_news, container, false);
-        RecyclerView newsRecyclerView = (RecyclerView) newsView.findViewById(R.id.news_list);
+        View gpaView = inflater.inflate(R.layout.fragment_gpa, container, false);
+        RecyclerView gpaRecyclerView = (RecyclerView) gpaView.findViewById(R.id.gpa_list);
         LinearLayoutManager layoutManager = new LinearLayoutManager(getActivity());
-        newsRecyclerView.setLayoutManager(layoutManager);
-        NewsAdapter adapter = new NewsAdapter(getNews());
-        newsRecyclerView.setAdapter(adapter);
-        return newsView;
-
+        gpaRecyclerView.setLayoutManager(layoutManager);
+        GPAAdapter adapter = new GPAAdapter(getNews());
+        gpaRecyclerView.setAdapter(adapter);
+        return gpaView;
     }
 
-    class NewsAdapter extends RecyclerView.Adapter<NewsAdapter.ViewHolder> {
-        private List<NewsModel> mNewsList;
+    private List<GPAModel> getNews() {
+        List<DataModel> dataList = new ArrayList<>();
+        List<GPAModel> resultList = new ArrayList<>();
+        int i = 0;
+        if (inputText.equals("")) {
+            GPAModel model = new GPAModel();
+            model.setLessonName("结果不存在，请重新输入");
+            model.setLessonCode("");
+            model.setCreditPoint(0.0f);
+            model.setSemesterName("");
+            model.setTeacherName("");
+            model.setTotalStudentNumber(0);
+            List<String> scoreValue = new ArrayList<>();
+            List<Float> scoreCount = new ArrayList<>();
+            model.setScoreValue(scoreValue);
+            model.setStudentCount(scoreCount);
+            resultList.add(model);
+        } else {
+            SQLiteManager dbManager = new SQLiteManager(getContext());
+            dataList = dbManager.getResult(inputText);
 
-        class ViewHolder extends RecyclerView.ViewHolder {
-            TextView newsNameText;
-            TextView newsDataText;
-            View listView;
+            if (dataList.size() != 0) {
+                while (i < dataList.size() - 1) {
+                    List<String> scoreValue = new ArrayList<>();
+                    List<Float> scoreCount = new ArrayList<>();
+                    int range = 0;
+                    int test = 0;
+                    test = i;
 
-            public ViewHolder(View newsView) {
-                super(newsView);
-                newsNameText = (TextView) newsView.findViewById(R.id.news_Name);
-                newsDataText = (TextView) newsView.findViewById(R.id.news_Data);
-                listView = newsView;
+                    while (dataList.get(test).getLessonCode().equals(dataList.get(test + range).getLessonCode()) && (test + range) < dataList.size() - 1) {
+                        String score = dataList.get(test + range).getScoreValue();
+                        Float count = dataList.get(test + range).getStudentCount();
+                        scoreValue.add(score);
+                        scoreCount.add(count);
+                        Log.v(TAG, "操作指针是"+(test+range));
+                        range = range + 1;
+                    }
+                    //将SQL数组转换成我们想要的数组
+                    GPAModel model = new GPAModel();
+                    model.setLessonName(dataList.get(test).getLessonName());
+                    model.setLessonCode(dataList.get(test).getLessonCode());
+                    model.setCreditPoint(dataList.get(test).getCreditPoint());
+                    model.setSemesterName(dataList.get(test).getSemesterName());
+                    model.setTeacherName(dataList.get(test).getTeacherName());
+                    model.setTotalStudentNumber(dataList.get(test).getTotalStudentNumber());
+                    model.setScoreValue(scoreValue);
+                    model.setStudentCount(scoreCount);
+                    resultList.add(model);
+                    i = i + range;
+                    //print("区间range是'\(range)'")
+                }
+                //最后一个score词典少了一个尾部，需要手动补充
+                String score = dataList.get(dataList.size()-1).getScoreValue();
+                Float count = dataList.get(dataList.size()-1).getStudentCount();
+                resultList.get(resultList.size()-1).getScoreValue().add(score);
+                resultList.get(resultList.size()-1).getStudentCount().add(count);
+            } else {
+                GPAModel model = new GPAModel();
+                model.setLessonName("结果不存在，请重新输入");
+                model.setLessonCode("");
+                model.setCreditPoint(0.0f);
+                model.setSemesterName("");
+                model.setTeacherName("");
+                model.setTotalStudentNumber(0);
+                List<String> scoreValue = new ArrayList<>();
+                List<Float> scoreCount = new ArrayList<>();
+                model.setScoreValue(scoreValue);
+                model.setStudentCount(scoreCount);
+                resultList.add(model);
             }
         }
-
-        public NewsAdapter(List<NewsModel> newsList) {
-            mNewsList = newsList;
-        }
-
-        @Override
-        public ViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
-            View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.news_item, parent, false);
-            final ViewHolder holder = new ViewHolder(view);
-            return holder;
-        }
-
-        @Override
-        public void onBindViewHolder(ViewHolder holder, int position) {
-            NewsModel news = mNewsList.get(position);
-            if (position % 2 == 0) {
-                holder.listView.setBackgroundColor(getResources().getColor(R.color.grayblue));
-            }
-            holder.newsNameText.setText(news.getName());
-            holder.newsDataText.setText(news.getData());
-        }
-
-        @Override
-        public int getItemCount() {
-            return mNewsList.size();
-        }
+        return resultList;
     }
 
-    private List<NewsModel> getNews() {
-        List<NewsModel> getList = new ArrayList<>();
-        getList = getData();
-        return getList;
-    }
 
-    private List<NewsModel> getData() {
-        List<NewsModel> getList = new ArrayList<>();
 
-        return getList;
-    }
 }

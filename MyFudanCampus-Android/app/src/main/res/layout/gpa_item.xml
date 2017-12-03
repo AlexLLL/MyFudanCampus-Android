@@ -5,26 +5,43 @@
     android:background="@color/white">
 
     <TextView
+        android:id="@+id/gpa_lessonName"
         android:layout_width="wrap_content"
         android:layout_height="20dp"
         android:textColor="@color/black"
-        android:text="Medium Text"
-        android:id="@+id/news_Name"
         android:layout_marginTop="8dp"
         android:layout_alignParentLeft="true"
         android:maxLines="1"
         android:ellipsize="end"
         android:gravity="center_vertical|center_horizontal"
+        android:text="lessonName"
         />
-
     <TextView
-        android:id="@+id/news_Data"
+        android:id="@+id/gpa_semesterName"
         android:layout_width="wrap_content"
         android:layout_height="20dp"
         android:textColor="@color/lightgray"
         android:layout_marginTop="32dp"
         android:layout_alignParentLeft="true"
         android:gravity="center_vertical|center_horizontal"
-        android:text="Medium Text" />
+        android:text="semesterName" />
+    <TextView
+        android:id="@+id/gpa_lessonCode"
+        android:layout_width="wrap_content"
+        android:layout_height="20dp"
+        android:textColor="@color/lightgray"
+        android:layout_marginTop="8dp"
+        android:layout_alignParentRight="true"
+        android:gravity="center_vertical|center_horizontal"
+        android:text="lessonCode" />
+    <TextView
+        android:id="@+id/gpa_teacherName"
+        android:layout_width="wrap_content"
+        android:layout_height="20dp"
+        android:textColor="@color/lightgray"
+        android:layout_marginTop="32dp"
+        android:layout_alignParentRight="true"
+        android:gravity="center_vertical|center_horizontal"
+        android:text="teacherName" />
 
 </RelativeLayout>
