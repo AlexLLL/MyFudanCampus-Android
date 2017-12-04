@@ -3,6 +3,7 @@ package com.example.myfudancampus;
 /**
  * Created by alex on 2017/12/3.
  */
+import java.sql.Array;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -13,8 +14,8 @@ public class GPAModel {
     private Integer totalStudentNumber;
     private String teacherName;
     private String semesterName;
-    private List<String> scoreValue;
-    private List<Float> studentCount;
+    private ArrayList<String> scoreValue;
+    private ArrayList<Float> studentCount;
 
     public String getLessonName() {
 
@@ -70,21 +71,21 @@ public class GPAModel {
 
         this.semesterName = data;
     }
-    public List<String> getScoreValue() {
+    public ArrayList<String> getScoreValue() {
 
         return scoreValue;
     }
 
-    public void setScoreValue(List<String> data) {
+    public void setScoreValue(ArrayList<String> data) {
 
         this.scoreValue = data;
     }
-    public List<Float> getStudentCount() {
+    public ArrayList<Float> getStudentCount() {
 
         return studentCount;
     }
 
-    public void setStudentCount(List<Float> data) {
+    public void setStudentCount(ArrayList<Float> data) {
 
         this.studentCount = data;
     }

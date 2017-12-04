@@ -13,14 +13,16 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.support.v7.widget.RecyclerView;
 import android.widget.TextView;
+
+import java.lang.reflect.Array;
 import java.util.ArrayList;
 import java.util.List;
 
 
 public class GPAFragment extends Fragment {
 
-    List<DataModel> resultList = new ArrayList<>();
-    List<DataModel> dataList = new ArrayList<>();
+    ArrayList<DataModel> resultList = new ArrayList<>();
+    ArrayList<DataModel> dataList = new ArrayList<>();
     String inputText = "C";
     public static final String TAG = "GPA";
 
@@ -31,14 +33,14 @@ public class GPAFragment extends Fragment {
         RecyclerView gpaRecyclerView = (RecyclerView) gpaView.findViewById(R.id.gpa_list);
         LinearLayoutManager layoutManager = new LinearLayoutManager(getActivity());
         gpaRecyclerView.setLayoutManager(layoutManager);
-        GPAAdapter adapter = new GPAAdapter(getNews());
+        GPAAdapter adapter = new GPAAdapter(getNews(), getContext());
         gpaRecyclerView.setAdapter(adapter);
         return gpaView;
     }
 
-    private List<GPAModel> getNews() {
+    private ArrayList<GPAModel> getNews() {
         List<DataModel> dataList = new ArrayList<>();
-        List<GPAModel> resultList = new ArrayList<>();
+        ArrayList<GPAModel> resultList = new ArrayList<>();
         int i = 0;
         if (inputText.equals("")) {
             GPAModel model = new GPAModel();
@@ -48,8 +50,8 @@ public class GPAFragment extends Fragment {
             model.setSemesterName("");
             model.setTeacherName("");
             model.setTotalStudentNumber(0);
-            List<String> scoreValue = new ArrayList<>();
-            List<Float> scoreCount = new ArrayList<>();
+            ArrayList<String> scoreValue = new ArrayList<>();
+            ArrayList<Float> scoreCount = new ArrayList<>();
             model.setScoreValue(scoreValue);
             model.setStudentCount(scoreCount);
             resultList.add(model);
@@ -59,8 +61,8 @@ public class GPAFragment extends Fragment {
 
             if (dataList.size() != 0) {
                 while (i < dataList.size() - 1) {
-                    List<String> scoreValue = new ArrayList<>();
-                    List<Float> scoreCount = new ArrayList<>();
+                    ArrayList<String> scoreValue = new ArrayList<>();
+                    ArrayList<Float> scoreCount = new ArrayList<>();
                     int range = 0;
                     int test = 0;
                     test = i;
@@ -100,8 +102,8 @@ public class GPAFragment extends Fragment {
                 model.setSemesterName("");
                 model.setTeacherName("");
                 model.setTotalStudentNumber(0);
-                List<String> scoreValue = new ArrayList<>();
-                List<Float> scoreCount = new ArrayList<>();
+                ArrayList<String> scoreValue = new ArrayList<>();
+                ArrayList<Float> scoreCount = new ArrayList<>();
                 model.setScoreValue(scoreValue);
                 model.setStudentCount(scoreCount);
                 resultList.add(model);
