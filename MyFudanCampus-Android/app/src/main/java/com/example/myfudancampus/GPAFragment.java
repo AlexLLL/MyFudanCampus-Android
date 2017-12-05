@@ -12,6 +12,8 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.support.v7.widget.RecyclerView;
+import android.widget.Button;
+import android.widget.EditText;
 import android.widget.TextView;
 
 import java.lang.reflect.Array;
@@ -21,11 +23,11 @@ import java.util.List;
 
 public class GPAFragment extends Fragment {
 
-    ArrayList<DataModel> resultList = new ArrayList<>();
-    ArrayList<DataModel> dataList = new ArrayList<>();
-    String inputText = "C";
+    private ArrayList<GPAModel> resultList = new ArrayList<>();
+    private ClearableEditText editText;
+    String inputText;
     public static final String TAG = "GPA";
-
+    GPAAdapter adapter;
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
@@ -33,15 +35,29 @@ public class GPAFragment extends Fragment {
         RecyclerView gpaRecyclerView = (RecyclerView) gpaView.findViewById(R.id.gpa_list);
         LinearLayoutManager layoutManager = new LinearLayoutManager(getActivity());
         gpaRecyclerView.setLayoutManager(layoutManager);
-        GPAAdapter adapter = new GPAAdapter(getNews(), getContext());
+        //
+        Button button = (Button) gpaView.findViewById(R.id.search_button);
+        editText = (ClearableEditText) gpaView.findViewById(R.id.text_input);
+        button.setOnClickListener(new View.OnClickListener()
+        {
+            @Override
+            public void onClick(View v)
+            {
+                resultList.clear();
+                getNews();
+                adapter.notifyDataSetChanged();
+            }
+        });
+        //
+        adapter = new GPAAdapter(resultList, getContext());
         gpaRecyclerView.setAdapter(adapter);
         return gpaView;
     }
 
-    private ArrayList<GPAModel> getNews() {
+    private void getNews() {
         List<DataModel> dataList = new ArrayList<>();
-        ArrayList<GPAModel> resultList = new ArrayList<>();
         int i = 0;
+        inputText = editText.getText().toString();
         if (inputText.equals("")) {
             GPAModel model = new GPAModel();
             model.setLessonName("结果不存在，请重新输入");
@@ -72,7 +88,6 @@ public class GPAFragment extends Fragment {
                         Float count = dataList.get(test + range).getStudentCount();
                         scoreValue.add(score);
                         scoreCount.add(count);
-                        Log.v(TAG, "操作指针是"+(test+range));
                         range = range + 1;
                     }
                     //将SQL数组转换成我们想要的数组
@@ -94,6 +109,7 @@ public class GPAFragment extends Fragment {
                 Float count = dataList.get(dataList.size()-1).getStudentCount();
                 resultList.get(resultList.size()-1).getScoreValue().add(score);
                 resultList.get(resultList.size()-1).getStudentCount().add(count);
+
             } else {
                 GPAModel model = new GPAModel();
                 model.setLessonName("结果不存在，请重新输入");
@@ -109,7 +125,6 @@ public class GPAFragment extends Fragment {
                 resultList.add(model);
             }
         }
-        return resultList;
     }
 
 

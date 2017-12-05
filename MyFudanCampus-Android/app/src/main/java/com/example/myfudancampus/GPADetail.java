@@ -67,7 +67,7 @@ public class GPADetail extends AppCompatActivity {
         while (i<detailScoreValue.size()) {
             String a = detailScoreValue.get(i);
             float f= detailStudentCount.get(i);
-            String b = String.valueOf(detailStudentCount.get(i));
+            String b = String.valueOf(Math.round(detailStudentCount.get(i)));
             gpaString = gpaString+a+":"+b+"  ";
             entries.add(new PieEntry(f, a));
             //随机颜色
@@ -92,6 +92,7 @@ public class GPADetail extends AppCompatActivity {
         PieData data = new PieData(set);
         piechart.getDescription().setEnabled(false);
         piechart.setData(data);
+        piechart.setUsePercentValues(true);
         piechart.invalidate(); // refresh
     }
 

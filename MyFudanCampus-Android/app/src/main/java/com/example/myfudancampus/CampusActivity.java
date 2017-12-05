@@ -1,18 +1,23 @@
 package com.example.myfudancampus;
 
+import android.nfc.Tag;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.design.widget.BottomNavigationView;
+import android.support.v7.app.ActionBar;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v4.view.ViewPager;
 import android.support.v4.app.Fragment;
+import android.view.LayoutInflater;
+import android.webkit.WebView;
+
 import com.ashokvarma.bottomnavigation.BottomNavigationBar;
 import com.ashokvarma.bottomnavigation.BottomNavigationItem;
 
 import java.util.ArrayList;
 import java.util.List;
 
-public class CampusActivity extends AppCompatActivity implements ViewPager.OnPageChangeListener{
+public class CampusActivity extends AppCompatActivity implements ViewPager.OnPageChangeListener {
 
     private ViewPager viewPager;
     private BottomNavigationBar bottomNavigationBar;
@@ -24,6 +29,10 @@ public class CampusActivity extends AppCompatActivity implements ViewPager.OnPag
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_campus);
         initView();
+
+        //自定义标题栏
+        getSupportActionBar().setDisplayOptions(ActionBar.DISPLAY_SHOW_CUSTOM);
+        getSupportActionBar().setCustomView(R.layout.actionbar_layout);
     }
 
     //view视图初始化
@@ -47,15 +56,17 @@ public class CampusActivity extends AppCompatActivity implements ViewPager.OnPag
                 .initialise();
 
         //设置tab按钮点击事件
-        bottomNavigationBar.setTabSelectedListener(new BottomNavigationBar.OnTabSelectedListener(){
+        bottomNavigationBar.setTabSelectedListener(new BottomNavigationBar.OnTabSelectedListener() {
             @Override
             public void onTabSelected(int position) {
 
                 viewPager.setCurrentItem(position);
             }
+
             @Override
             public void onTabUnselected(int position) {
             }
+
             @Override
             public void onTabReselected(int position) {
             }
@@ -90,5 +101,19 @@ public class CampusActivity extends AppCompatActivity implements ViewPager.OnPag
     @Override
     public void onPageScrollStateChanged(int state) {
     }
+
+
+    //设置webview返回
+    @Override
+    public void onBackPressed() {
+        if (BBSFragment.webView != null) {
+            if (BBSFragment.webView.canGoBack()) {
+                BBSFragment.webView.goBack();
+            } else {
+                // do when mWebView cant go back anymore
+            }
+        }
+    }
 }
+
 

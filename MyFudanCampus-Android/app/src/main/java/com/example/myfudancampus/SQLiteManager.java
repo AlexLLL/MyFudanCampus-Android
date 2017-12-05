@@ -52,6 +52,7 @@ public class SQLiteManager extends SQLiteAssetHelper {
             }while(cursor.moveToNext());
         }
         cursor.close();
+        database.close();
         return resultList;
     }
 }

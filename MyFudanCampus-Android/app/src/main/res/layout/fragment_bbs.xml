@@ -2,10 +2,10 @@
 <android.support.constraint.ConstraintLayout
     xmlns:android="http://schemas.android.com/apk/res/android" android:layout_width="match_parent"
     android:layout_height="match_parent">
-    <TextView
+
+    <WebView
         android:layout_width="match_parent"
-        android:layout_height="40dp"
-        android:gravity="center"
-        android:text="3"
-        android:textSize="20sp" />
+        android:layout_height="match_parent"
+        android:id="@+id/webView"
+        />
 </android.support.constraint.ConstraintLayout>
