@@ -7,19 +7,34 @@ package com.example.myfudancampus;
 public class NewsModel {
     private String Name;
     private String Data;
+    private String Location;
 
     public String getName() {
+
         return  Name;
     }
     public void setName(String name) {
+
         this.Name = name;
     }
 
     public String getData() {
+
         return Data;
     }
 
     public void setData(String data) {
+
         this.Data = data;
+    }
+
+    public String getLocation() {
+
+        return Location;
+    }
+
+    public void setLocation(String data) {
+
+        this.Location = data;
     }
 }

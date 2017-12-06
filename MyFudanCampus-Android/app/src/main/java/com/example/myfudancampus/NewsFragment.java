@@ -100,7 +100,8 @@ public class NewsFragment extends Fragment {
                     for(int i = 0;i < matched1.size(); i ++){
                         NewsModel news = new NewsModel();
                         news.setName("  "+matched1.get(i).substring(10,matched1.get(i).length()-2));
-                        news.setData("  "+matched2.get(i).substring(4,matched2.get(i).length()-2)+" "+matched4.get(i).substring(4,matched4.get(i).length()-2)+" "+matched3.get(i).substring(10,matched3.get(i).length()-2));
+                        news.setData(matched2.get(i).substring(4,matched2.get(i).length()-2)+" "+matched4.get(i).substring(4,matched4.get(i).length()-2)+" ");
+                        news.setLocation("  "+matched3.get(i).substring(10,matched3.get(i).length()-2));
                         htmlList.add(news);
                     }
         return htmlList;

@@ -18,11 +18,13 @@ public class NewsAdapter extends RecyclerView.Adapter<NewsAdapter.ViewHolder> {
     class ViewHolder extends RecyclerView.ViewHolder {
         TextView newsNameText;
         TextView newsDataText;
+        TextView newsLoactionText;
         View listView;
         public ViewHolder(View newsView) {
             super(newsView);
             newsNameText = (TextView) newsView.findViewById(R.id.news_Name);
             newsDataText = (TextView) newsView.findViewById(R.id.news_Data);
+            newsLoactionText = (TextView) newsView.findViewById(R.id.news_Location);
             listView = newsView;
         }
     }
@@ -47,9 +49,12 @@ public class NewsAdapter extends RecyclerView.Adapter<NewsAdapter.ViewHolder> {
         holder.setIsRecyclable(true);
         if(position % 2 == 0){
             holder.listView.setBackgroundColor(0x80E0EEEE);
+        } else {
+            holder.listView.setBackgroundColor(0XFFFFFF);
         }
         holder.newsNameText.setText(news.getName());
         holder.newsDataText.setText(news.getData());
+        holder.newsLoactionText.setText(news.getLocation());
     }
     @Override
     public int getItemCount() {

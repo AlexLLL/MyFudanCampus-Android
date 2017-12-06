@@ -2,6 +2,7 @@ package com.example.myfudancampus;
 
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
+import android.support.v7.app.ActionBar;
 import android.support.v7.app.AppCompatActivity;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -36,13 +37,16 @@ public class GPADetail extends AppCompatActivity {
     ArrayList<String> detailScoreValue = new ArrayList<String>();
     ArrayList<Float> detailStudentCount = new ArrayList<Float>();
     PieChart piechart;
-    Random random;
 
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.gpa_item_detail);
+        //自定义标题栏
+        getSupportActionBar().setDisplayOptions(ActionBar.DISPLAY_SHOW_CUSTOM);
+        getSupportActionBar().setCustomView(R.layout.actionbar_layout);
+        //设置detail数据
         detailLessonName = (TextView) findViewById(R.id.detail_lessonName);
         detailLessonCode = (TextView) findViewById(R.id.detail_lessonCode);
         detailCreditPoint = (TextView) findViewById(R.id.detail_creditPoint);
