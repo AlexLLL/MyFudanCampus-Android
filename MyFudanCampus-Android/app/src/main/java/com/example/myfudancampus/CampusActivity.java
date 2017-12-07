@@ -49,6 +49,7 @@ public class CampusActivity extends AppCompatActivity implements ViewPager.OnPag
         bottomNavigationBar
                 .setActiveColor(R.color.dodgerblue)
                 .setMode(BottomNavigationBar.MODE_FIXED)
+                .setBackgroundStyle(BottomNavigationBar.BACKGROUND_STYLE_STATIC)
                 .addItem(new BottomNavigationItem(R.drawable.ic_1, (getString(R.string.title_news))))
                 .addItem(new BottomNavigationItem(R.drawable.ic_2, (getString(R.string.title_gpa))))
                 .addItem(new BottomNavigationItem(R.drawable.ic_3, (getString(R.string.title_bbs))))
