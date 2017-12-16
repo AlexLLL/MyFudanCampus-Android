@@ -33,9 +33,9 @@ public class BusFragment extends Fragment {
         RecyclerView newsRecyclerView = (RecyclerView) busView.findViewById(R.id.bus_list);
         LinearLayoutManager layoutManager = new LinearLayoutManager(getActivity());
         newsRecyclerView.setLayoutManager(layoutManager);
-        getBus();
         adapter = new BusAdapter(resultList);
         newsRecyclerView.setAdapter(adapter);
+        getBus();
         return busView;
     }
 
@@ -43,7 +43,7 @@ public class BusFragment extends Fragment {
         try {
             JSONObject obj = new JSONObject(loadJsonFromAsset());
             JSONArray myJsonArray = obj.getJSONArray("bus");
-
+            resultList.clear();
             for (int i = 0; i < myJsonArray.length(); i++) {
                 JSONObject myJsonObject = myJsonArray.getJSONObject(i);
                 BusModel model = new BusModel();

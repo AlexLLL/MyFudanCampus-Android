@@ -38,6 +38,12 @@ public class BusAdapter extends RecyclerView.Adapter<BusAdapter.ViewHolder> {
         return holder;
     }
 
+    public void setData(List<BusModel> viewData) {
+        mBusList.clear();
+        mBusList.addAll(viewData);
+        notifyDataSetChanged();
+    }
+
     @Override
     public void onBindViewHolder(BusAdapter.ViewHolder holder, int position) {
         BusModel news = mBusList.get(position);
