@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="30dp"
+    android:background="@color/white">
+
+    <TextView
+        android:id="@+id/bus_To"
+        android:layout_width="130dp"
+        android:layout_height="20dp"
+        android:textColor="@color/black"
+        android:text="Medium Text"
+        android:layout_centerInParent="true"
+        android:gravity="center_vertical|center_horizontal"
+        />
+
+    <TextView
+        android:id="@+id/bus_Time1"
+        android:layout_width="130dp"
+        android:layout_height="20dp"
+        android:textColor="@color/lightgray"
+        android:layout_centerVertical="true"
+        android:layout_toLeftOf="@id/bus_To"
+        android:gravity="center_vertical|center_horizontal"
+        android:text="Medium Text1" />
+    <TextView
+        android:id="@+id/bus_Time2"
+        android:layout_width="130dp"
+        android:layout_height="20dp"
+        android:textColor="@color/lightgray"
+        android:layout_centerVertical="true"
+        android:layout_toRightOf="@id/bus_To"
+        android:gravity="center_vertical|center_horizontal"
+        android:text="Medium Text2" />
+    <View
+        android:layout_width="fill_parent"
+        android:layout_height="1px"
+        android:layout_marginTop="29dp"
+        android:background="@android:color/darker_gray"  />
+
+</RelativeLayout>

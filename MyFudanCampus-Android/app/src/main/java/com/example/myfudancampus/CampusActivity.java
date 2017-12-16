@@ -1,15 +1,10 @@
 package com.example.myfudancampus;
 
-import android.nfc.Tag;
 import android.os.Bundle;
-import android.support.annotation.NonNull;
-import android.support.design.widget.BottomNavigationView;
 import android.support.v7.app.ActionBar;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v4.view.ViewPager;
 import android.support.v4.app.Fragment;
-import android.view.LayoutInflater;
-import android.webkit.WebView;
 
 import com.ashokvarma.bottomnavigation.BottomNavigationBar;
 import com.ashokvarma.bottomnavigation.BottomNavigationItem;
@@ -82,7 +77,7 @@ public class CampusActivity extends AppCompatActivity implements ViewPager.OnPag
         fragments.add(new NewsFragment());
         fragments.add(new GPAFragment());
         fragments.add(new BBSFragment());
-        fragments.add(new AboutFragment());
+        fragments.add(new BusFragment());
         //设置viewPager跳转适配器
         viewPager.setAdapter(new SectionsPagerAdapter(getSupportFragmentManager(), fragments));
         viewPager.addOnPageChangeListener(this);

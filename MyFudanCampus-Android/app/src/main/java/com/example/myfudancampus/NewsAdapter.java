@@ -48,7 +48,7 @@ public class NewsAdapter extends RecyclerView.Adapter<NewsAdapter.ViewHolder> {
         NewsModel news = mNewsList.get(position);
         holder.setIsRecyclable(true);
         if(position % 2 == 0){
-            holder.listView.setBackgroundColor(0x80E0EEEE);
+            holder.listView.setBackgroundColor(0x0c1e90ff);
         } else {
             holder.listView.setBackgroundColor(0XFFFFFF);
         }
